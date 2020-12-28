@@ -5,7 +5,7 @@ export default class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shelf: props.book.shelf,
+      shelf: props.book.shelf ? props.book.shelf : 'none',
     };
   }
 
@@ -20,7 +20,7 @@ export default class Book extends Component {
   render() {
     const { book } = this.props;
     const options = [
-      { value: 'currentlyReading', label: 'current' },
+      { value: 'currentlyReading', label: 'currentlyReading' },
       { value: 'wantToRead', label: 'Want to Read' },
       { value: 'read', label: 'Read' },
       { value: 'none', label: 'None' },
@@ -28,22 +28,22 @@ export default class Book extends Component {
     return (
       <div className="book">
         <div className="book-thumbnail">
-          <img src={book.imageLinks.thumbnail} alt="" />
-          <select
-            value={this.state.shelf}
-            onChange={this.handleChange}
-            className="book-select"
-          >
-            <option disabled>Select</option>
-            {options.map((option) => (
-              <option value={option.value} key={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <a target="_blank" href={book.infoLink}>
+            <img src={book.imageLinks.thumbnail} alt="" />
+          </a>
+          <div className="book-select">
+            <select value={this.state.shelf} onChange={this.handleChange}>
+              <option disabled>Select</option>
+              {options.map((option) => (
+                <option value={option.value} key={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <p>{book.title}</p>
-        <span>{book.authors}</span>
+        <p className="book-title">{book.title}</p>
+        <span className="book-author">{book.authors}</span>
       </div>
     );
   }

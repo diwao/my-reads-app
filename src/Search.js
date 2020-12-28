@@ -21,6 +21,10 @@ export default class Search extends Component {
   handleSearch = async (e) => {
     e.preventDefault();
     const books = await search(this.state.keyword);
+    if (books.error) {
+      alert('No result');
+      return;
+    }
     this.setState({
       books,
     });
@@ -35,15 +39,20 @@ export default class Search extends Component {
   render() {
     return (
       <div>
-        <header>
+        <header className="header-search">
           <Link to="/">
-            <button>Back</button>
+            <button className="back-to-home">Back</button>
           </Link>
-          <form onSubmit={this.handleSearch}>
-            <input onChange={this.handleInput} value={this.state.keyword} />
+          <form onSubmit={this.handleSearch} className="search-form">
+            <input
+              onChange={this.handleInput}
+              value={this.state.keyword}
+              placeholder="Input and enter keyword"
+              className="search-input"
+            />
           </form>
         </header>
-        <main>
+        <main className="container">
           <ul className="books">
             {this.state.books.map((book) => (
               <Book

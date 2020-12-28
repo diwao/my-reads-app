@@ -1,8 +1,8 @@
-.book-list-heading {
-  border-bottom: 1px solid #ccc;
-  font-size: 24px;
-  font-weight: bold;
-  padding-bottom: 10px;
+/* Common */
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1080px;
 }
 
 .books {
@@ -10,6 +10,31 @@
   flex-wrap: wrap;
 }
 
+.floating-action-button {
+  appearance: none;
+  background-color: green;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
+  border: 0;
+  bottom: 40px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 40px;
+  height: 60px;
+  position: fixed;
+  right: 40px;
+  width: 60px;
+}
+
+/* BookList */
+.book-list-heading {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+/* Book */
 .book {
   margin: 20px;
   max-width: 200px;
@@ -24,14 +49,91 @@
 }
 
 .book-select {
-  appearance: none;
+  align-items: center;
   background-color: green;
   border-radius: 50%;
   border: 0;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,.2);
   bottom: 10px;
-  display: block;
-  height: 30px;
+  display: flex;
+  height: 40px;
+  overflow: hidden;
   position: absolute;
   right: 10px;
-  width: 30px;
+  width: 40px;
+}
+
+.book-select::after {
+  color: #fff;
+  content: '+';
+  font-size: 24px;
+  pointer-events: none;
+  text-align: center;
+  width: 100%;
+}
+
+.book-select select {
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.book-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.book-author {
+  color: gray;
+  display: block;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Home */
+.header-home {
+  background-color: green;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.header-home h1 {
+  margin: 0;
+}
+
+/* Search */
+.header-search {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  text-align: center;
+}
+
+.back-to-home {
+  appearance: none;
+  background-color: #fff;
+  border: 0;
+  display: block;
+  font-size: 18px;
+  height: 100%;
+  text-decoration: none;
+  width: 80px;
+}
+
+.search-form {
+  flex: 1;
+  height: 100%;
+}
+
+.search-input {
+  appearance: none;
+  border: 0;
+  display: block;
+  font-size: 18px;
+  height: 100%;
+  padding: 10px;
+  width: 100%;
 }

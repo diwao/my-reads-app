@@ -27,14 +27,32 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <header>My Reads</header>
-        <BookList
-          heading="Current Reading"
-          books={this.state.books}
-          onUpdateShelf={this.updateShelf}
-        />
+        <header className="header-home">
+          <h1>My Reads</h1>
+        </header>
+        <main className="container">
+          <BookList
+            heading="Currently Reading"
+            books={this.state.books.filter(
+              (book) => book.shelf === 'currentlyReading'
+            )}
+            onUpdateShelf={this.updateShelf}
+          />
+          <BookList
+            heading="Want to Read"
+            books={this.state.books.filter(
+              (book) => book.shelf === 'wantToRead'
+            )}
+            onUpdateShelf={this.updateShelf}
+          />
+          <BookList
+            heading="Read"
+            books={this.state.books.filter((book) => book.shelf === 'read')}
+            onUpdateShelf={this.updateShelf}
+          />
+        </main>
         <Link to="/search">
-          <button>+</button>
+          <button className="floating-action-button">+</button>
         </Link>
       </div>
     );
