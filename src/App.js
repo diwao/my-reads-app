@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import { getAll } from './BooksAPI';
+import BookList from './BookList';
 
 class App extends Component {
   constructor(props) {
@@ -21,11 +22,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ul>
-          {this.state.books.map((book) => (
-            <li key={book.id}>{book.title}</li>
-          ))}
-        </ul>
+        <BookList heading="Current Reading" books={this.state.books} />
       </div>
     );
   }
