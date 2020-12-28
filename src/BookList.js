@@ -3,15 +3,23 @@ import React, { Component } from 'react';
 import Book from './Book';
 
 export default class BookList extends Component {
+  handleChangeShelf = (payload) => {
+    this.props.onUpdateShelf(payload);
+  };
+
   render() {
     const { heading, books } = this.props;
     return (
-      <div>
-        <h2>{heading}</h2>
+      <div className="book-list">
+        <h2 className="book-list-heading">{heading}</h2>
         {books ? (
-          <ul>
+          <ul className="books">
             {books.map((book) => (
-              <Book book={book} key={book.id} />
+              <Book
+                book={book}
+                key={book.id}
+                onChangeShelf={this.handleChangeShelf}
+              />
             ))}
           </ul>
         ) : (

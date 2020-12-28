@@ -10,10 +10,11 @@ export default class Book extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value);
+    const shelf = e.target.value;
     this.setState({
-      shelf: e.target.value,
+      shelf,
     });
+    this.props.onChangeShelf({ book: this.props.book, shelf });
   };
 
   render() {
@@ -25,16 +26,24 @@ export default class Book extends Component {
       { value: 'none', label: 'None' },
     ];
     return (
-      <div>
-        {book.title}: {book.id}
-        <select value={this.state.shelf} onChange={this.handleChange}>
-          <option disabled>Select</option>
-          {options.map((option) => (
-            <option value={option.value} key={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div className="book">
+        <div className="book-thumbnail">
+          <img src={book.imageLinks.thumbnail} alt="" />
+          <select
+            value={this.state.shelf}
+            onChange={this.handleChange}
+            className="book-select"
+          >
+            <option disabled>Select</option>
+            {options.map((option) => (
+              <option value={option.value} key={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <p>{book.title}</p>
+        <span>{book.authors}</span>
       </div>
     );
   }
