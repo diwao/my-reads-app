@@ -20,7 +20,7 @@ export default class Book extends Component {
   render() {
     const { book } = this.props;
     const options = [
-      { value: 'currentlyReading', label: 'currentlyReading' },
+      { value: 'currentlyReading', label: 'Currently Reading' },
       { value: 'wantToRead', label: 'Want to Read' },
       { value: 'read', label: 'Read' },
       { value: 'none', label: 'None' },
@@ -28,7 +28,7 @@ export default class Book extends Component {
     return (
       <div className="book">
         <div className="book-thumbnail">
-          <a target="_blank" href={book.infoLink}>
+          <a target="_blank" href={book.infoLink} rel="noreferrer">
             <img src={book.imageLinks.thumbnail} alt="" />
           </a>
           <div className="book-select">

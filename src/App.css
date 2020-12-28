@@ -65,8 +65,8 @@
 
 .book-select::after {
   color: #fff;
-  content: '+';
-  font-size: 24px;
+  content: '▼';
+  font-size: 16px;
   pointer-events: none;
   text-align: center;
   width: 100%;

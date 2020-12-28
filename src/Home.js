@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAll } from './BooksAPI';
+import { getAll, update } from './BooksAPI';
 import BookList from './BookList';
 import { Link } from 'react-router-dom';
 
@@ -19,9 +19,21 @@ export default class Home extends Component {
     });
   }
 
-  updateShelf = ({ book, shelf }) => {
-    console.log(book);
-    console.log(shelf);
+  updateShelf = async ({ book, shelf }) => {
+    const res = await update(book, shelf);
+    console.log(res);
+    this.setState((currentState) => {
+      const newBooks = currentState.books.map((currentBook) => {
+        if (currentBook.id === book.id) {
+          currentBook.shelf = shelf;
+        }
+        return currentBook;
+      });
+      console.log(newBooks);
+      return {
+        books: newBooks,
+      };
+    });
   };
 
   render() {

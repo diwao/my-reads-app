@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { search } from './BooksAPI';
+import { search, update } from './BooksAPI';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 
@@ -31,9 +31,9 @@ export default class Search extends Component {
     console.log(books);
   };
 
-  updateShelf = ({ book, shelf }) => {
-    console.log(book);
-    console.log(shelf);
+  updateShelf = async ({ book, shelf }) => {
+    const res = await update(book, shelf);
+    console.log(res);
   };
 
   render() {
