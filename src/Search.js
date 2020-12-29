@@ -7,7 +7,7 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: '',
+      query: '',
       searchedBooks: [],
       books: [],
     };
@@ -22,17 +22,22 @@ export default class Search extends Component {
 
   handleInput = (e) => {
     this.setState({
-      keyword: e.target.value,
+      query: e.target.value,
     });
   };
 
   handleSearch = async (e) => {
     e.preventDefault();
-    const searchedBooks = await search(this.state.keyword);
-    if (searchedBooks.error) {
-      alert('No result');
+    if (this.state.query === '') {
+      alert('Please input any queries.');
       return;
     }
+    const searchedBooks = await search(this.state.query);
+    if (searchedBooks.error) {
+      alert('Invalid queries.');
+      return;
+    }
+    console.log(searchedBooks);
     this.setState({
       searchedBooks: searchedBooks.map((searchedBook) => {
         this.state.books.forEach((book) => {
@@ -62,8 +67,8 @@ export default class Search extends Component {
           <form onSubmit={this.handleSearch} className="search-form">
             <input
               onChange={this.handleInput}
-              value={this.state.keyword}
-              placeholder="Input and enter keyword"
+              value={this.state.query}
+              placeholder="Input any queries and hit the enter key."
               className="search-input"
             />
           </form>
