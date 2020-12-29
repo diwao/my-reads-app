@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { search, update } from './BooksAPI';
+import { search, update, getAll } from './BooksAPI';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 
@@ -8,8 +8,16 @@ export default class Search extends Component {
     super(props);
     this.state = {
       keyword: '',
+      searchedBooks: [],
       books: [],
     };
+  }
+
+  async componentDidMount() {
+    const books = await getAll();
+    this.setState({
+      books,
+    });
   }
 
   handleInput = (e) => {
@@ -20,15 +28,23 @@ export default class Search extends Component {
 
   handleSearch = async (e) => {
     e.preventDefault();
-    const books = await search(this.state.keyword);
-    if (books.error) {
+    const searchedBooks = await search(this.state.keyword);
+    if (searchedBooks.error) {
       alert('No result');
       return;
     }
     this.setState({
-      books,
+      searchedBooks: searchedBooks.map((searchedBook) => {
+        this.state.books.forEach((book) => {
+          if (book.id === searchedBook.id) {
+            searchedBook.shelf = book.shelf;
+            return;
+          }
+        });
+        return searchedBook;
+      }),
     });
-    console.log(books);
+    console.log(searchedBooks);
   };
 
   updateShelf = async ({ book, shelf }) => {
@@ -54,7 +70,7 @@ export default class Search extends Component {
         </header>
         <main className="container">
           <ul className="books">
-            {this.state.books.map((book) => (
+            {this.state.searchedBooks.map((book) => (
               <Book
                 book={book}
                 key={book.id}
