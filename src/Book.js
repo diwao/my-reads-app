@@ -29,7 +29,14 @@ export default class Book extends Component {
       <div className="book">
         <div className="book-thumbnail">
           <a target="_blank" href={book.infoLink} rel="noreferrer">
-            <img src={book.imageLinks.thumbnail} alt="" />
+            <img
+              src={
+                book.imageLinks
+                  ? book.imageLinks.thumbnail
+                  : './images/no_image.png'
+              }
+              alt=""
+            />
           </a>
           <div className="book-select">
             <select value={this.state.shelf} onChange={this.handleChange}>
