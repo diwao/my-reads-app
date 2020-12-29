@@ -1,7 +1,6 @@
-import { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-export default class Book extends Component {
+class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,3 +54,10 @@ export default class Book extends Component {
     );
   }
 }
+
+Book.propsType = {
+  book: PropTypes.object,
+  onChangeShelf: PropTypes.func,
+};
+
+export default Book;

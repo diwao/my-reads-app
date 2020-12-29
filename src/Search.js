@@ -3,7 +3,7 @@ import { search, update, getAll } from './BooksAPI';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,3 +88,5 @@ export default class Search extends Component {
     );
   }
 }
+
+export default Search;
