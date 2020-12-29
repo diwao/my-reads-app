@@ -1,8 +1,8 @@
-import { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Book from './Book';
 
-export default class BookList extends Component {
+class BookList extends Component {
   handleChangeShelf = (payload) => {
     this.props.onUpdateShelf(payload);
   };
@@ -29,3 +29,10 @@ export default class BookList extends Component {
     );
   }
 }
+
+BookList.propsType = {
+  heading: PropTypes.string,
+  books: PropTypes.array,
+};
+
+export default BookList;

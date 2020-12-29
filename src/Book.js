@@ -1,7 +1,6 @@
-import { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-export default class Book extends Component {
+class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +19,7 @@ export default class Book extends Component {
   render() {
     const { book } = this.props;
     const options = [
-      { value: 'currentlyReading', label: 'currentlyReading' },
+      { value: 'currentlyReading', label: 'Currently Reading' },
       { value: 'wantToRead', label: 'Want to Read' },
       { value: 'read', label: 'Read' },
       { value: 'none', label: 'None' },
@@ -28,8 +27,15 @@ export default class Book extends Component {
     return (
       <div className="book">
         <div className="book-thumbnail">
-          <a target="_blank" href={book.infoLink}>
-            <img src={book.imageLinks.thumbnail} alt="" />
+          <a target="_blank" href={book.infoLink} rel="noreferrer">
+            <img
+              src={
+                book.imageLinks
+                  ? book.imageLinks.thumbnail
+                  : './images/no_image.png'
+              }
+              alt=""
+            />
           </a>
           <div className="book-select">
             <select value={this.state.shelf} onChange={this.handleChange}>
@@ -48,3 +54,10 @@ export default class Book extends Component {
     );
   }
 }
+
+Book.propsType = {
+  book: PropTypes.object,
+  onChangeShelf: PropTypes.func,
+};
+
+export default Book;
