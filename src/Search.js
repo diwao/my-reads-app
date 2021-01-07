@@ -30,11 +30,17 @@ class Search extends Component {
     e.preventDefault();
     if (this.state.query === '') {
       alert('Please input any queries.');
+      this.setState({
+        searchedBooks: [],
+      });
       return;
     }
     const searchedBooks = await search(this.state.query);
     if (searchedBooks.error) {
       alert('Invalid queries.');
+      this.setState({
+        searchedBooks: [],
+      });
       return;
     }
     console.log(searchedBooks);
