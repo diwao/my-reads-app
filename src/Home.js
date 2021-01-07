@@ -37,32 +37,32 @@ class Home extends Component {
   };
 
   render() {
+    const shelves = {
+      currentlyReading: ['Currently Reading', 'currentlyReading'],
+      wantToRead: ['Want to Read', 'wantToRead'],
+      read: ['Read', 'read'],
+    };
+
+    const books = [];
+    for (const key in shelves) {
+      books.push(
+        <BookList
+          heading={shelves[key][0]}
+          books={this.state.books.filter(
+            (book) => book.shelf === shelves[key][1]
+          )}
+          onUpdateShelf={this.updateShelf}
+          key={shelves[key]}
+        />
+      );
+    }
+
     return (
       <div>
         <header className="header-home">
           <h1>My Reads</h1>
         </header>
-        <main className="container">
-          <BookList
-            heading="Currently Reading"
-            books={this.state.books.filter(
-              (book) => book.shelf === 'currentlyReading'
-            )}
-            onUpdateShelf={this.updateShelf}
-          />
-          <BookList
-            heading="Want to Read"
-            books={this.state.books.filter(
-              (book) => book.shelf === 'wantToRead'
-            )}
-            onUpdateShelf={this.updateShelf}
-          />
-          <BookList
-            heading="Read"
-            books={this.state.books.filter((book) => book.shelf === 'read')}
-            onUpdateShelf={this.updateShelf}
-          />
-        </main>
+        <main className="container">{books}</main>
         <Link to="/search">
           <button className="floating-action-button">+</button>
         </Link>
